@@ -1,5 +1,8 @@
 API_KEY = 'e5529a761ee3394ffbd237269966e9f53a4c7bf3'
 
+ART = 'art-default.png'
+ICON = 'icon-default.png'
+
 @handler('/video/giantbomb', 'Giant Bomb')
 def MainMenu():
     oc = ObjectContainer()
@@ -13,7 +16,8 @@ def MainMenu():
                 summary=stream['channel']['status'],
                 source_title='Justin.tv',
                 tagline=str(stream['stream_count']) + ' Viewers',
-                thumb=stream['channel']['image_url_huge']
+                thumb=stream['channel']['image_url_huge'],
+                art=R(ART)
             )
         )
 
@@ -21,7 +25,9 @@ def MainMenu():
         DirectoryObject(
             key=Callback(Videos),
             title='Latest Videos',
-            summary='Watch the newest stuff.'
+            summary='Watch the newest stuff.',
+            art=R(ART)
+
         )
     )
 
@@ -33,7 +39,8 @@ def MainMenu():
                 DirectoryObject(
                     key=Callback(EnduranceRunMenu),
                     title=cat['name'],
-                    summary=cat['deck']
+                    summary=cat['deck'],
+                    art=R(ART)
                 )
             )
         else:
@@ -41,13 +48,15 @@ def MainMenu():
                 DirectoryObject(
                     key=Callback(Videos, cat_id=str(cat['id'])),
                     title=cat['name'],
-                    summary=cat['deck']
+                    summary=cat['deck'],
+                    art=R(ART)
                 )
             )
 
     oc.add(
         PrefsObject(
-            title='Preferences'
+            title='Preferences',
+            art=R(ART)
         )
     )
 
@@ -55,7 +64,8 @@ def MainMenu():
         InputDirectoryObject(
             key=Callback(Videos),
             title='Search',
-            prompt='Search'
+            prompt='Search',
+            art=R(ART)
         )
     )
 
@@ -67,14 +77,17 @@ def EnduranceRunMenu():
             DirectoryObject(
                 key=Callback(Videos, cat_id='5-DP'),
                 title='Deadly Premonition',
+                art=R(ART)
             ),
             DirectoryObject(
                 key=Callback(Videos, cat_id='5-P4'),
-                title='Persona 4'
+                title='Persona 4',
+                art=R(ART)
             ),
             DirectoryObject(
                 key=Callback(Videos, cat_id='5-MO'),
-                title='The Matrix Online: Not Like This'
+                title='The Matrix Online: Not Like This',
+                art=R(ART)
             )
         ]
     )
@@ -108,13 +121,18 @@ def Videos(cat_id=None, query=None):
         quality = '_1500.mp4'
 
     for vid in videos:
+        if 'wallpaper_image' not in vid or not vid['wallpaper_image']: #or whatever it gets called
+            vid_art = R(ART)
+        else:
+            vid_art = vid['wallpaper_image']
+
         oc.add(
                 VideoClipObject(
                     key='http://media.giantbomb.com/video/' + vid['url'].replace('.mp4', quality),
                     title=vid['name'],
                     summary=vid['deck'],
                     thumb=vid['image']['screen_url'],
-                    #art=video artwork goes here
+                    art=vid_art
                 )
         )
 
