@@ -108,8 +108,6 @@ def Videos(cat_id=None, query=None):
     elif cat_id == '5-MO':
         videos = JSON.ObjectFromURL('http://api.giantbomb.com/videos/?api_key=' + API_KEY + '&video_type=5&offset=105&limit=21&format=json')['results']
         videos = [video for video in videos if video['name'].startswith('The Matrix Online')]
-    elif cat_id == '3':
-        videos = JSON.ObjectFromURL('http://api.giantbomb.com/videos/?api_key=' + API_KEY + '&video_type=' + cat_id + '&sort=-publish_date&format=json')['results']
     elif cat_id:
         videos = JSON.ObjectFromURL('http://api.giantbomb.com/videos/?api_key=' + API_KEY + '&video_type=' + cat_id + '&sort=-publish_date&format=json')['results']
     else:
