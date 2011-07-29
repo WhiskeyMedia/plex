@@ -7,7 +7,7 @@ ICON = 'icon-default.png'
 def MainMenu():
     oc = ObjectContainer()
 
-    live_stream = JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=giantbomb')
+    live_stream = JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=whiskeymedia')
     for stream in live_stream:
         oc.add(
             VideoClipObject(
@@ -26,6 +26,7 @@ def MainMenu():
             key=Callback(Videos),
             title='Latest Videos',
             summary='Watch the newest stuff.',
+            thumb=R(ICON),
             art=R(ART)
 
         )
@@ -40,6 +41,7 @@ def MainMenu():
                     key=Callback(EnduranceRunMenu),
                     title=cat['name'],
                     summary=cat['deck'],
+                    thumb=R(ICON),
                     art=R(ART)
                 )
             )
@@ -49,22 +51,25 @@ def MainMenu():
                     key=Callback(Videos, cat_id=str(cat['id'])),
                     title=cat['name'],
                     summary=cat['deck'],
+                    thumb=R(ICON),
                     art=R(ART)
                 )
             )
-
-    oc.add(
-        PrefsObject(
-            title='Preferences',
-            art=R(ART)
-        )
-    )
 
     oc.add(
         InputDirectoryObject(
             key=Callback(Videos),
             title='Search',
             prompt='Search',
+            thumb=R(ICON),
+            art=R(ART)
+        )
+    )
+
+    oc.add(
+        PrefsObject(
+            title='Preferences',
+            thumb=R(ICON),
             art=R(ART)
         )
     )
