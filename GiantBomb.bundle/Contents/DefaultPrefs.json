@@ -1,17 +1,9 @@
 [
     {
-        "id": "username",
-        "label": "Username",
+        "id": "access_code",
+        "label": "Access Code",
         "type": "text",
         "default": ""
-    },
-    {
-        "id": "password",
-        "label": "Password",
-        "type": "text",
-        "option": "hidden",
-        "default": "",
-        "secure": "true"
     },
     {
         "id": "quality",
