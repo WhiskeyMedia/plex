@@ -1,16 +1,17 @@
 [
     {
         "id": "username",
-        "type": "text",
         "label": "Username",
+        "type": "text",
         "default": ""
     },
     {
         "id": "password",
-        "type": "text",
         "label": "Password",
+        "type": "text",
+        "option": "hidden",
         "default": "",
-        "option": "hidden"
+        "secure": "true"
     },
     {
         "id": "quality",
