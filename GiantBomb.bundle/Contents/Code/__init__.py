@@ -6,12 +6,12 @@ ART = 'art-default.png'
 ICON = 'icon-default.png'
 
 def ValidatePrefs():
-    access_code = Prefs['access_code'].upper()
-    if access_code and len(access_code) == 6 and access_code != Dict['access_code']:
+    Prefs['access_code'] = Prefs['access_code'].upper()
+    access_code = Prefs['access_code']
+    if access_code and len(access_code) == 6:
         response = JSON.ObjectFromURL(API_PATH + '/validate?access_code=' + access_code + '&format=json')
         if api_key in response:
             Dict['api_key'] = response['api_key']
-            Dict['access_code'] = access_code
 
 @handler('/video/giantbomb', 'Giant Bomb')
 def MainMenu():
