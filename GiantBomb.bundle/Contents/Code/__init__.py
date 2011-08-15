@@ -22,6 +22,7 @@ def MainMenu():
     oc = ObjectContainer()
 
     live_stream = JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=whiskeymedia')
+    live_stream += JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=giantbomb')
     for stream in live_stream:
         oc.add(
             VideoClipObject(
