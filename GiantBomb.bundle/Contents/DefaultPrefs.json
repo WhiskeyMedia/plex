@@ -1,7 +1,7 @@
 [
     {
-        "id": "access_code",
-        "label": "Access Code",
+        "id": "link_code",
+        "label": "Link Code",
         "type": "text",
         "default": ""
     },
