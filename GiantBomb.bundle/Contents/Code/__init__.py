@@ -21,17 +21,15 @@ def MainMenu():
 
     oc = ObjectContainer()
 
-    live_stream = JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=whiskeymedia')
-    live_stream += JSON.ObjectFromURL('http://api.justin.tv/api/stream/list.json?channel=giantbomb')
-    for stream in live_stream:
+    chats = JSON.ObjectFromURL(API_PATH + '/chats/?api_key=' + API_KEY + '&format=json')['results']
+    for chat in chats:
         oc.add(
             VideoClipObject(
-                key=WebVideoURL(stream['channel']['channel_url']),
-                title='LIVE: ' + stream['channel']['title'],
-                summary=stream['channel']['status'],
+                key=WebVideoURL('http://www.justin.tv/' + chat['channel_name']),
+                title='LIVE: ' + chat['title'],
+                summary=chat['deck'],
                 source_title='Justin.tv',
-                tagline=str(stream['stream_count']) + ' Viewers',
-                thumb=stream['channel']['image_url_huge'],
+                thumb=chat['image']['super_url'],
                 art=R(ART)
             )
         )
@@ -39,7 +37,7 @@ def MainMenu():
     oc.add(
         DirectoryObject(
             key='/video/giantbomb/videos',
-            title='Latest Videos',
+            title='Latest',
             summary='Watch the newest stuff.',
             thumb=R(ICON),
             art=R(ART)
@@ -158,7 +156,7 @@ def Videos(cat_id=None, query=None):
                     key=url,
                     title=vid['name'],
                     summary=vid['deck'],
-                    thumb=vid['image']['screen_url'],
+                    thumb=vid['image']['super_url'],
                     art=vid_art
                 )
         )
