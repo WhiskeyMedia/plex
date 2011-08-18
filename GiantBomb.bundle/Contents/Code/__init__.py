@@ -23,9 +23,14 @@ def MainMenu():
 
     chats = JSON.ObjectFromURL(API_PATH + '/chats/?api_key=' + API_KEY + '&format=json')['results']
     for chat in chats:
+        url = 'http://www.justin.tv/widgets/live_embed_player.swf?channel=' + chat['channel_name'] + '&auto_play=true&start_volume=25'
+        if chat['password']:
+            url += '&publisherGuard=' + chat['password']
+
         oc.add(
             VideoClipObject(
-                key=WebVideoURL('http://www.justin.tv/' + chat['channel_name']),
+
+                key=WebVideoURL(url),
                 title='LIVE: ' + chat['title'],
                 summary=chat['deck'],
                 source_title='Justin.tv',
