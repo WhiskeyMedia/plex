@@ -1,6 +1,5 @@
-API_PATH = 'http://localhost:8000'
-# API_KEY = 'e5529a761ee3394ffbd237269966e9f53a4c7bf3' # Default API key
-API_KEY = '3353202b4c9af87523cab1184e471fd1c5be4def'
+API_PATH = 'http://api.giantbomb.com'
+API_KEY = '70d735e54938286d6d9142727877107ced20e5ff' # Default API key
 
 ART = 'art-default.png'
 ICON = 'icon-default.png'
