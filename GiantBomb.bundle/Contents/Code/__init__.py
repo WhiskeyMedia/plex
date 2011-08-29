@@ -1,26 +1,33 @@
-API_PATH = 'http://api.giantbomb.com'
-API_KEY = '70d735e54938286d6d9142727877107ced20e5ff' # Default API key
+API_PATH = 'http://api.giantbomb.com/'
+API_KEY = '70d735e54938286d6d9142727877107ced20e5ff'
 
 ART = 'art-default.png'
 ICON = 'icon-default.png'
 
 def ValidatePrefs():
-    Prefs['link_code'] = Prefs['link_code'].upper()
-    link_code = Prefs['link_code']
+    link_code = Prefs['link_code'].upper()
     if link_code and len(link_code) == 6:
         response = JSON.ObjectFromURL(API_PATH + '/validate?link_code=' + link_code + '&format=json')
-        if api_key in response:
+        if 'api_key' in response:
             Dict['api_key'] = response['api_key']
+            Dict.Save()
 
 @handler('/video/giantbomb', 'Giant Bomb')
 def MainMenu():
     if 'api_key' in Dict:
-        global API_KEY
         API_KEY = Dict['api_key']
 
     oc = ObjectContainer()
 
-    chats = JSON.ObjectFromURL(API_PATH + '/chats/?api_key=' + API_KEY + '&format=json')['results']
+    # Live stream
+    response = JSON.ObjectFromURL(API_PATH + '/chats/?api_key=' + API_KEY + '&format=json')
+
+    if response['status_code'] == 100:
+        # Revert to the default key
+        Dict.Reset()
+        Dict.Save()
+
+    chats = response['results']
     for chat in chats:
         url = 'http://www.justin.tv/widgets/live_embed_player.swf?channel=' + chat['channel_name'] + '&auto_play=true&start_volume=25'
         if chat['password']:
@@ -28,7 +35,6 @@ def MainMenu():
 
         oc.add(
             VideoClipObject(
-
                 key=WebVideoURL(url),
                 title='LIVE: ' + chat['title'],
                 summary=chat['deck'],
@@ -51,6 +57,7 @@ def MainMenu():
     categories = JSON.ObjectFromURL(API_PATH + '/video_types/?api_key=' + API_KEY + '&format=json')['results']
 
     for cat in categories:
+        # Endurance Runs
         if cat['id'] == 5:
             oc.add(
                 DirectoryObject(
@@ -118,6 +125,9 @@ def EnduranceRunMenu():
 
 @route('/video/giantbomb/videos')
 def Videos(cat_id=None, query=None):
+    if 'api_key' in Dict:
+        API_KEY = Dict['api_key']
+
     oc = ObjectContainer()
 
     if query:
