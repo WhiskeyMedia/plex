@@ -1,0 +1,15 @@
+[
+    {
+        "id": "link_code",
+        "label": "Link Code",
+        "type": "text",
+        "default": ""
+    },
+    {
+        "id": "quality",
+        "type": "enum",
+        "label": "Quality",
+        "values": ["Auto", "Low", "High", "HD"],
+        "default": "Auto"
+    }
+]
