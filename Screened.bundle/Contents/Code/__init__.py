@@ -1,4 +1,4 @@
-API_PATH = 'http://api.screened.com/'
+API_PATH = 'http://api.screened.com'
 API_KEY = '5d352805281dc8e8caea956309de585749dd574a'
 
 ART = 'art-default.png'
@@ -15,6 +15,7 @@ def ValidatePrefs():
 @handler('/video/screened', 'Screened')
 def MainMenu():
     if 'api_key' in Dict:
+        global API_KEY
         API_KEY = Dict['api_key']
 
     oc = ObjectContainer()
@@ -90,6 +91,7 @@ def MainMenu():
 @route('/video/screened/videos')
 def Videos(cat_id=None, query=None):
     if 'api_key' in Dict:
+        global API_KEY
         API_KEY = Dict['api_key']
 
     oc = ObjectContainer()
