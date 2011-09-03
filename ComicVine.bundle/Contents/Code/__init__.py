@@ -1,4 +1,4 @@
-API_PATH = 'http://api.comicvine.com/'
+API_PATH = 'http://api.comicvine.com'
 API_KEY = 'a951111e937d6fee5d454a2bb4d3484fc1d6b1c9'
 
 ART = 'art-default.png'
@@ -15,6 +15,7 @@ def ValidatePrefs():
 @handler('/video/comicvine', 'Comic Vine')
 def MainMenu():
     if 'api_key' in Dict:
+        global API_KEY
         API_KEY = Dict['api_key']
 
     oc = ObjectContainer()
@@ -90,6 +91,7 @@ def MainMenu():
 @route('/video/comicvine/videos')
 def Videos(cat_id=None, query=None):
     if 'api_key' in Dict:
+        global API_KEY
         API_KEY = Dict['api_key']
 
     oc = ObjectContainer()
