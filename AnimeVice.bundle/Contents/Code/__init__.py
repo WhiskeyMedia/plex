@@ -1,5 +1,5 @@
-API_PATH = 'http://api.screened.com'
-API_KEY = '5d352805281dc8e8caea956309de585749dd574a'
+API_PATH = 'http://api.animevice.com'
+API_KEY = '60c191518f76d744b37e4788c3a924f7e6b7491e'
 
 ART = 'art-default.png'
 ICON = 'icon-default.png'
