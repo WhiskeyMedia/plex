@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.justin.tv/.*" plugin=".*\.swf" initialState="loading" version="1.0">
+	<setCookie domain=".justin.tv" path="/" name="mature_allowed" secure="false" value="true"/>
+	<crop x="0" y="0" width="0" height="-30" />
+	<!-- PLAYING -->
+	<state name="loading">
+		<event>
+			<condition>
+				<frameLoaded />
+			</condition>
+			<action>
+				<pause time="50000" />
+				<click x="543" y="301" /> 
+				<goto state="playing" />
+			</action>
+		</event>
+	</state>
+	<state name="playing">
+		<event> 
+			<condition>
+				<command name="pause" />
+			</condition>
+			<action>
+				<click x="9" y="368" />
+				<click x="543" y="301" />
+				<goto state="paused" />
+			</action>  
+		</event>
+	</state>
+	<state name="paused">
+		<event>
+			<condition>
+				<command name="play" />
+			</condition>
+			<action>
+				<click x="9" y="368" />
+				<click x="543" y="301" />
+				<goto state="playing" />
+			</action>
+		</event>
+	</state>
+</site>
