@@ -1,5 +1,5 @@
-API_PATH = 'http://api.screened.com'
-API_KEY = '5d352805281dc8e8caea956309de585749dd574a'
+API_PATH = 'http://api.tested.com'
+API_KEY = '060b7347a9f8e317a1a9efceea0f8b70bf7018f6'
 
 ART = 'art-default.png'
 ICON = 'icon-default.png'
@@ -12,7 +12,7 @@ def ValidatePrefs():
             Dict['api_key'] = response['api_key']
             Dict.Save()
 
-@handler('/video/screened', 'Screened')
+@handler('/video/tested', 'Tested')
 def MainMenu():
     if 'api_key' in Dict:
         global API_KEY
@@ -47,7 +47,7 @@ def MainMenu():
 
     oc.add(
         DirectoryObject(
-            key='/video/screened/videos',
+            key='/video/tested/videos',
             title='Latest',
             summary='Watch the newest stuff.',
             thumb=R(ICON),
@@ -60,7 +60,7 @@ def MainMenu():
     for cat in categories:
         oc.add(
             DirectoryObject(
-                key='/video/screened/videos/?cat_id=' + str(cat['id']),
+                key='/video/tested/videos/?cat_id=' + str(cat['id']),
                 title=cat['name'],
                 summary=cat['deck'],
                 thumb=R(ICON),
@@ -88,7 +88,7 @@ def MainMenu():
 
     return oc
 
-@route('/video/screened/videos')
+@route('/video/tested/videos')
 def Videos(cat_id=None, query=None):
     if 'api_key' in Dict:
         global API_KEY
