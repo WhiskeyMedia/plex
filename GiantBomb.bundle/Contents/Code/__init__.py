@@ -41,7 +41,8 @@ def MainMenu():
                 summary=chat['deck'],
                 source_title='Justin.tv',
                 thumb=chat['image']['super_url'],
-                art=R(ART)
+                art=R(ART),
+                rating_key=chat['channel_name']
             )
         )
 
@@ -173,7 +174,8 @@ def Videos(cat_id=None, query=None):
                     title=vid['name'],
                     summary=vid['deck'],
                     thumb=vid['image']['super_url'],
-                    art=vid_art
+                    art=vid_art,
+                    rating_key=vid['id']
                 )
         )
 
