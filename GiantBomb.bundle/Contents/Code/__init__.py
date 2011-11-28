@@ -1,5 +1,6 @@
 API_PATH = 'http://api.giantbomb.com'
 API_KEY = '70d735e54938286d6d9142727877107ced20e5ff'
+WEB_PATH = 'http://www.giantbomb.com'
 
 ART = 'art-default.png'
 ICON = 'icon-default.png'
@@ -106,6 +107,11 @@ def EnduranceRunMenu():
     oc = ObjectContainer(
         objects = [
             DirectoryObject(
+                key='/video/giantbomb/videos/?cat_id=5-CT',
+                title='Chrono Trigger',
+                art=R(ART)
+            ),
+            DirectoryObject(
                 key='/video/giantbomb/videos/?cat_id=5-DP',
                 title='Deadly Premonition',
                 art=R(ART)
@@ -135,8 +141,10 @@ def Videos(cat_id=None, query=None):
 
     if query:
         videos = JSON.ObjectFromURL(API_PATH + '/search/?api_key=' + API_KEY + '&resources=video&query=' + query + '&format=json')['results']
+    elif cat_id == '5-CT':
+        videos = JSON.ObjectFromURL(API_PATH + '/videos/?api_key=' + API_KEY + '&video_type=5&offset=240&format=json')['results']
     elif cat_id == '5-DP':
-        videos = JSON.ObjectFromURL(API_PATH + '/videos/?api_key=' + API_KEY + '&video_type=5&offset=161&format=json')['results']
+        videos = JSON.ObjectFromURL(API_PATH + '/videos/?api_key=' + API_KEY + '&video_type=5&offset=161&limit=79&format=json')['results']
     elif cat_id == '5-P4':
         videos = JSON.ObjectFromURL(API_PATH + '/videos/?api_key=' + API_KEY + '&video_type=5&format=json')['results']
         videos += JSON.ObjectFromURL(API_PATH + '/videos/?api_key=' + API_KEY + '&video_type=5&offset=100&limit=61&format=json')['results']
